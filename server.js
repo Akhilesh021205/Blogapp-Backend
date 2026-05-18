@@ -28,12 +28,13 @@ process.on("exit", (code) => {
 });
 
 
-// ================= CORS =================
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://blogapp-frontend-nczelsq0l-akhilesh021205s-projects.vercel.app"
+  ],
   credentials: true
 }));
-
 // ================= BODY PARSER =================
 app.use(exp.json());
 
