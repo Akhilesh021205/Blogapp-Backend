@@ -61,7 +61,10 @@ app.use(passport.session());
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 app.get("/auth/google/callback", 
-  passport.authenticate("google", { failureRedirect: `${process.env.FRONTEND_URL || "http://localhost:5173"}/login` }),
+  (req, res, next) => {
+    const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:5173").replace(/\/+$/, "");
+    passport.authenticate("google", { failureRedirect: `${frontendUrl}/login` })(req, res, next);
+  },
   (req, res) => {
     // Successful authentication
     const user = req.user;
@@ -78,7 +81,7 @@ app.get("/auth/google/callback",
     });
 
     // Redirect back to frontend based on role
-    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+    const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:5173").replace(/\/+$/, "");
     if (user.role === "AUTHOR") {
       res.redirect(`${frontendUrl}/author-profile`);
     } else {

@@ -16,12 +16,14 @@ if (!clientId) {
   console.error("CRITICAL ERROR: GOOGLE_CLIENT_ID is not defined in .env");
 }
 
+const backendBaseUrl = (process.env.BACKEND_URL || "http://localhost:4000").replace(/\/+$/, "");
+
 passport.use(
   new GoogleStrategy(
     {
       clientID: clientId,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.BACKEND_URL || "http://localhost:4000"}/auth/google/callback`,
+      callbackURL: `${backendBaseUrl}/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
