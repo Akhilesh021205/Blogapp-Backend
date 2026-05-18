@@ -29,10 +29,15 @@ process.on("exit", (code) => {
 
 
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://blogapp-frontend-nczelsq0l-akhilesh021205s-projects.vercel.app"
-  ],
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    const isAllowed = origin.startsWith("http://localhost:") || origin.endsWith(".vercel.app");
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 // ================= BODY PARSER =================
