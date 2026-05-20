@@ -106,9 +106,9 @@ nodemon server.js
 ## Environment Variables
 
 env
-PORT=5000
-DB_URL=your_mongodb_url
-JWT_SECRET=your_secret_key
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+PORT=4000
+DB_URL=mongodb://127.0.0.1:27017/Blogapp
+JWT_SECRET=blogappsecretkey
+CLOUDINARY_CLOUD_NAME=dbclhy4w4
+CLOUDINARY_API_KEY=689192527697457
+CLOUDINARY_API_SECRET=xePMsMw9KflySTREhU-wzCI_Xoc
